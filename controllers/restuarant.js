@@ -15,7 +15,7 @@ restaurantCntrl.createRestaurant = async (req,res)=>{
         created_at :require.body.created_at,
         updated_at :require.body.updated_at 
       })
-       
+        
 
     }catch{
 
