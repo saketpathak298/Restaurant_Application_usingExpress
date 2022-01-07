@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const loginCntrl = {}
 const bcrypt = require('bcrypt')
 loginCntrl.createLogin = async(req,res)=>{
-
+   try{
     const {email,password}=req.body
 
     const userExit = await LoginModel.findOne({email})
@@ -23,10 +23,21 @@ loginCntrl.createLogin = async(req,res)=>{
     
     await saveloginDetails.save().then((response)=>{
       res.status(200).send({
-          
+        data:response  
       })
     }).catch((err)=>{
-
+     res.status(500).send({
+         error:err,
+         msg:"something went wrong"
+     })
     })
     
+   }catch(err){
+       res.status(500).send({
+           msg:"something went wrong",
+           error:err
+       })
+
+   }
+   
 }
